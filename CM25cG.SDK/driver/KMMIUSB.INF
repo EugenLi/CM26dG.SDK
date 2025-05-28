@@ -1,0 +1,84 @@
+;-----------------------------------------------------------------
+;  Setup File for Windows 10/8.1/8/7/Vista
+;  Copyright by KONICA MINOLTA, INC.
+;
+;  Manufacturer: KONICA MINOLTA, INC.
+;  Revision:     1.00.0009
+;  Last Modify:  2015/09/06
+;-----------------------------------------------------------------
+[Version]
+Signature="$CHICAGO$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%Companyname%
+DriverVer=09/06/2015,1.0.0.9
+CatalogFile=KMMIUSB.CAT
+
+[DestinationDirs]
+DefaultDestDir=12
+
+;-----------------------------------------------------------------
+;  Manufacturer
+;-----------------------------------------------------------------
+[Manufacturer]
+%CompanyName%=Models,ntx86,ntamd64,ntia64,ntarm
+
+[Models]
+%USB.PnP%=ComPort, USB\VID_132B&PID_210D&MI_00
+%USB.PnP%=ComPort, USB\VID_132B&PID_210E
+
+[Models.ntx86]
+%USB.PnP%=ComPort, USB\VID_132B&PID_210D&MI_00
+%USB.PnP%=ComPort, USB\VID_132B&PID_210E
+
+[Models.ntamd64]
+%USB.PnP%=ComPort, USB\VID_132B&PID_210D&MI_00
+%USB.PnP%=ComPort, USB\VID_132B&PID_210E
+
+[Models.ntia64]
+%USB.PnP%=ComPort, USB\VID_132B&PID_210D&MI_00
+%USB.PnP%=ComPort, USB\VID_132B&PID_210E
+
+[Models.ntarm]
+%USB.PnP%=ComPort, USB\VID_132B&PID_210D&MI_00
+%USB.PnP%=ComPort, USB\VID_132B&PID_210E
+
+;-----------------------------------------------------------------
+;  COM sections
+;-----------------------------------------------------------------
+[ComPort.NT]
+include=mdmcpq.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=ComPort.NT.AddReg
+
+[ComPort.NT.AddReg]
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+;-----------------------------------------------------------------
+;  Service installation
+;-----------------------------------------------------------------
+[ComPort.NT.Services]
+include=mdmcpq.inf
+AddService = usbser, 0x00000002, Serial_Service_Inst
+
+;-----------------------------------------------------------------
+;  Serial Port Driver install sections
+;-----------------------------------------------------------------
+[Serial_Service_Inst]
+DisplayName    = %Serial.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\usbser.sys
+LoadOrderGroup = Extended base
+
+;-----------------------------------------------------------------
+;  User readable strings
+;-----------------------------------------------------------------
+[Strings]
+CompanyName="KONICA MINOLTA, INC."
+DiskName_Desc="Installation Disk"
+PortsClassName = "Ports (COM & LPT)"
+Serenum.SVCDESC = "Serenum Filter Driver"
+Serial.SVCDESC = "USB Serial Ports Driver"
+USB.PnP="Measuring Instruments"
