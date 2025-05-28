@@ -1,0 +1,21 @@
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\CMMISDK.h
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\CMMISDK.NET.dll
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\CMMISDK_Api.h
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\CMMISDK_Error.h
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\CMMISDK_Parameters.h
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\CMMISDK_TypeDefine.h
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\CMMISDK_x64.dll
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\CMMISDK_x86.dll
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\TypeDefine.h
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\doc\CM-MISDK(C#) ReferenceManual_ENG-ohne Schutz.pdf
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\doc\CM-MISDK(C#) ReferenceManual_ENG.pdf
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\doc\CM-MISDK(C) ReferenceManual_ENG.pdf
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\CMMISDK_x64.lib
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\CMMISDK_x86.lib
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\CM25cG.SDK.dll
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\bin\x64\Debug\CM25cG.SDK.pdb
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\obj\x64\Debug\CM26cG.SDK.csproj.AssemblyReference.cache
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\obj\x64\Debug\CM26cG.SDK.csproj.CoreCompileInputs.cache
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\obj\x64\Debug\CM26cG.SDK.csproj.Up2Date
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\obj\x64\Debug\CM25cG.SDK.dll
+C:\Users\MH\source\repos\CM25cG.SDK\CM25cG.SDK\obj\x64\Debug\CM25cG.SDK.pdb
