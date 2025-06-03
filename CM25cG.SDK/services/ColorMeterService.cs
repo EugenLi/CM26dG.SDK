@@ -94,6 +94,8 @@ namespace CM26dG.SDK.Services
                 Console.ReadLine();
                 CheckReturn(_sdk.PerformGlossCalibration(comPort), "Glanzkalibrierung");
 
+                CheckReturn(_sdk.SetObserverAndIlluminant(0, Observer.Deg10, Illuminant.ILL_D65, comPort), "Beobachter & Lichtart setzen");
+
                 return true;
             });
         }
@@ -106,13 +108,20 @@ namespace CM26dG.SDK.Services
 
             var combined = await PerformMeasurementAsync(MeasCondScie.SC_SCIE);
 
+
             return new MeasurementResult
             {
-                SpectrumSCI = combined.SCI.Spec.Select(v => v * 0.01).ToArray(),
-                SpectrumSCE = combined.SCE.Spec.Select(v => v * 0.01).ToArray(),
-                Gloss = combined.SCI.Gloss
+                SpectrumSCI = combined.SCI_Spec.Spec.Select(v => v * 0.01f).ToArray(),
+                SpectrumSCE = combined.SCE_Spec.Spec.Select(v => v * 0.01f).ToArray(),
+                Gloss = combined.SCI_Spec.Gloss,
+                LabSCI = combined.LabSCI,
+                LabSCE = combined.LabSCE
             };
         }
+
+
+
+
 
 
         private async Task<DualSpecData> PerformMeasurementAsync(MeasCondScie mode)
@@ -132,25 +141,58 @@ namespace CM26dG.SDK.Services
                     CheckReturn(ret, "Messstatus prüfen");
                 } while (status != MeasStatus.Idling);
 
+                // SCI Spektrum
                 var specSCI = new SpecData();
                 var formSCI = new DataForm { DataType = DataType.SC_SCI_UVFULL };
+                ret = _sdk.ReadLatestData(formSCI, specSCI, comPort);
+                CheckReturn(ret, "SCI-Spektrum lesen");
 
+                // SCE Spektrum
                 var specSCE = new SpecData();
                 var formSCE = new DataForm { DataType = DataType.SC_SCE_UVFULL };
-
-                ret = _sdk.ReadLatestData(formSCI, specSCI, comPort);
-                CheckReturn(ret, "SCI-Daten lesen");
-
                 ret = _sdk.ReadLatestData(formSCE, specSCE, comPort);
-                CheckReturn(ret, "SCE-Daten lesen");
+                CheckReturn(ret, "SCE-Spektrum lesen");
+
+                // SCI Lab
+                var labSCI = new ColorValue
+                {
+                    ColorModeId = ColorSpace.COLOR_LAB
+                };
+
+                var labFormSCI = new DataForm { DataType = DataType.SC_SCI_UVFULL };
+                ret = _sdk.ReadLatestData(labFormSCI, labSCI, comPort);
+                CheckReturn(ret, "SCI-Lab lesen");
+
+                // SCE Lab
+                var labSCE = new ColorValue
+                {
+                    ColorModeId = ColorSpace.COLOR_LAB
+                };
+
+                var labFormSCE = new DataForm { DataType = DataType.SC_SCE_UVFULL };
+                ret = _sdk.ReadLatestData(labFormSCE, labSCE, comPort);
+                CheckReturn(ret, "SCE-Lab lesen");
 
                 return new DualSpecData
                 {
-                    SCI = specSCI,
-                    SCE = specSCE
+                    SCI_Spec = specSCI,
+                    SCE_Spec = specSCE,
+                    LabSCI = (
+                        labSCI.Value.TryGetValue("L", out var l1) ? l1 : 0.0,
+                        labSCI.Value.TryGetValue("a", out var a1) ? a1 : 0.0,
+                        labSCI.Value.TryGetValue("b", out var b1) ? b1 : 0.0
+                    ),
+                    LabSCE = (
+                        labSCE.Value.TryGetValue("L", out var l2) ? l2 : 0.0,
+                        labSCE.Value.TryGetValue("a", out var a2) ? a2 : 0.0,
+                        labSCE.Value.TryGetValue("b", out var b2) ? b2 : 0.0
+                    )
                 };
             });
         }
+
+
+
 
 
         public async Task DisconnectAsync()

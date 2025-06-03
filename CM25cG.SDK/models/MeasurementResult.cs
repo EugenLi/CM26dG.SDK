@@ -11,6 +11,12 @@ namespace CM26dG.SDK.Models
         public double[] SpectrumSCI { get; set; }
         public double[] SpectrumSCE { get; set; }
         public double Gloss { get; set; }
+
+        public (double L, double A, double B) LabSCI { get; set; }
+        public (double L, double A, double B) LabSCE { get; set; }
     }
+
+
+
 }
 
